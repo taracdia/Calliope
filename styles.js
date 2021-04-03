@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 		width: 250,
 		height: 250,
 		alignSelf: "center",
-		borderRadius: 40,
 	},
 	progressBar: {
 		height: 20,
@@ -34,6 +33,9 @@ const styles = StyleSheet.create({
 	},
 	artist: {
 		fontSize: 14,
+	},
+	buttonsContainer: {
+		flex: 1,
 	},
 });
 

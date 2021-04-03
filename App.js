@@ -11,15 +11,38 @@ import {
 import Slider from "@react-native-community/slider";
 import styles from "./styles";
 
-const songDetails = {
-	id: "1",
-	url:
-		"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
-	title: "The Greatest Song",
-	album: "Great Album",
-	artist: "A Great Dude",
-	artwork: "https://picsum.photos/300",
-};
+const songs = [
+	{
+		id: 0,
+		url:
+			"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
+		title: "Song 0",
+		album: "Great Album",
+		artist: "A Great Dude",
+		artwork: "https://picsum.photos/300",
+		type: "default",
+	},
+	{
+		id: 1,
+		url:
+			"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
+		title: "Song 1",
+		album: "Great Album",
+		artist: "A Great Dude",
+		artwork: "https://picsum.photos/300",
+		type: "default",
+	},
+	{
+		id: 2,
+		url:
+			"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
+		title: "Song 2",
+		album: "Great Album",
+		artist: "A Great Dude",
+		artwork: "https://picsum.photos/300",
+		type: "default",
+	},
+];
 
 const trackPlayerInit = async () => {
 	await TrackPlayer.setupPlayer();
@@ -32,15 +55,8 @@ const trackPlayerInit = async () => {
 			TrackPlayer.CAPABILITY_JUMP_BACKWARD,
 		],
 	});
-	await TrackPlayer.add({
-		id: songDetails.id,
-		url: songDetails.url,
-		type: "default",
-		title: songDetails.title,
-		album: songDetails.album,
-		artist: songDetails.artist,
-		artwork: songDetails.artwork,
-	});
+	const songDetails = songs[0];
+	await TrackPlayer.add(songs).catch(e => console.log(e.message));
 	return true;
 };
 
@@ -50,6 +66,8 @@ const App = () => {
 	const [sliderValue, setSliderValue] = useState(0);
 	const [isSeeking, setIsSeeking] = useState(false);
 	const { position, duration } = useTrackPlayerProgress(250);
+
+	const [songNumber, setSongNumber] = useState(0);
 
 	useEffect(() => {
 		const startPlayer = async () => {
@@ -99,15 +117,15 @@ const App = () => {
 			<View style={styles.imageContainer}>
 				<Image
 					source={{
-						uri: songDetails.artwork,
+						uri: songs[songNumber].artwork,
 					}}
 					resizeMode="contain"
 					style={styles.albumImage}
 				/>
 			</View>
 			<View style={styles.detailsContainer}>
-				<Text style={styles.songTitle}>{songDetails.title}</Text>
-				<Text style={styles.artist}>{songDetails.artist}</Text>
+				<Text style={styles.songTitle}>{songs[songNumber].title}</Text>
+				<Text style={styles.artist}>{songs[songNumber].artist}</Text>
 			</View>
 			<View style={styles.controlsContainer}>
 				<Slider
@@ -121,6 +139,8 @@ const App = () => {
 					onSlidingComplete={slidingCompleted}
 					thumbTintColor="#000"
 				/>
+			</View>
+			<View style={styles.buttonsContainer}>
 				<Button
 					title={isPlaying ? "Pause" : "Play"}
 					onPress={onButtonPressed}

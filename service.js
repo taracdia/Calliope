@@ -36,4 +36,6 @@ module.exports = async function () {
 		}
 		TrackPlayer.seekTo(newPosition);
 	});
+
+	//TODO: add skip to next, etc
 };
