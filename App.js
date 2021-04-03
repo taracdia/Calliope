@@ -55,7 +55,6 @@ const trackPlayerInit = async () => {
 			TrackPlayer.CAPABILITY_JUMP_BACKWARD,
 		],
 	});
-	const songDetails = songs[0];
 	await TrackPlayer.add(songs).catch(e => console.log(e.message));
 	return true;
 };
@@ -112,6 +111,23 @@ const App = () => {
 		setIsSeeking(false);
 	};
 
+	const nextButton = () => {
+		const newSongNumber = songNumber + 1;
+		if (songs.length > newSongNumber) {
+			setSongNumber(newSongNumber);
+		} else {
+			setSongNumber(0);
+		}
+	};
+
+	const prevButton = () => {
+		if (songNumber === 0) {
+			setSongNumber(songs.length - 1);
+		} else {
+			setSongNumber(songNumber - 1);
+		}
+	};
+
 	return (
 		<View style={styles.mainContainer}>
 			<View style={styles.imageContainer}>
@@ -141,6 +157,7 @@ const App = () => {
 				/>
 			</View>
 			<View style={styles.buttonsContainer}>
+				<Button title="prev" onPress={prevButton} />
 				<Button
 					title={isPlaying ? "Pause" : "Play"}
 					onPress={onButtonPressed}
@@ -148,6 +165,7 @@ const App = () => {
 					disabled={!isTrackPlayerInit}
 					color="#000000"
 				/>
+				<Button title="next" onPress={nextButton} />
 			</View>
 		</View>
 	);
