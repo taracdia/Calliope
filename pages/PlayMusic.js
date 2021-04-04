@@ -53,8 +53,16 @@ const trackPlayerInit = async () => {
 		capabilities: [
 			TrackPlayer.CAPABILITY_PLAY,
 			TrackPlayer.CAPABILITY_PAUSE,
-			TrackPlayer.CAPABILITY_JUMP_FORWARD,
-			TrackPlayer.CAPABILITY_JUMP_BACKWARD,
+			TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
+			TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
+			TrackPlayer.CAPABILITY_SEEK_TO,
+		],
+		compactCapabilities: [
+			TrackPlayer.CAPABILITY_PLAY,
+			TrackPlayer.CAPABILITY_PAUSE,
+			TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
+			TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
+			TrackPlayer.CAPABILITY_SEEK_TO,
 		],
 	});
 	await TrackPlayer.add(songs).catch(e => console.log(e.message));
@@ -246,6 +254,7 @@ const PlayMusic = () => {
 						tintColor={primary}
 					/>
 				</TouchableOpacity>
+				{/* TODO: volume and shuffle/sort and repeat */}
 			</View>
 		</View>
 	);
