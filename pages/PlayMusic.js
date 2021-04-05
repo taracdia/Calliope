@@ -12,39 +12,7 @@ import Slider from "@react-native-community/slider";
 
 import styles from "../styles";
 import { primary } from "./ThemeChoose";
-
-const songs = [
-	{
-		id: 0,
-		url:
-			"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
-		title: "Song 0",
-		album: "Great Album",
-		artist: "A Great Dude",
-		artwork: "https://picsum.photos/300",
-		type: "default",
-	},
-	{
-		id: 1,
-		url:
-			"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
-		title: "Song 1",
-		album: "Great Album",
-		artist: "A Great Dude",
-		artwork: "https://picsum.photos/300",
-		type: "default",
-	},
-	{
-		id: 2,
-		url:
-			"https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3",
-		title: "Song 2",
-		album: "Great Album",
-		artist: "A Great Dude",
-		artwork: "https://picsum.photos/300",
-		type: "default",
-	},
-];
+const songs = require("../songs.json");
 
 const trackPlayerInit = async () => {
 	await TrackPlayer.setupPlayer();
@@ -72,9 +40,9 @@ const trackPlayerInit = async () => {
 const PlayMusic = () => {
 	const [isTrackPlayerInit, setIsTrackPlayerInit] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(false);
-	const [sliderValue, setSliderValue] = useState(0);
+	const [seekValue, setSeekValue] = useState(0);
 	const [isSeeking, setIsSeeking] = useState(false);
-	const { position, duration } = useTrackPlayerProgress(250);
+	const { position, duration } = useTrackPlayerProgress(1000);
 
 	const [songNumber, setSongNumber] = useState(0);
 
@@ -89,7 +57,7 @@ const PlayMusic = () => {
 	//this hook updates the value of the slider whenever the current position of the song changes
 	useEffect(() => {
 		if (!isSeeking && position && duration) {
-			setSliderValue(position / duration);
+			setSeekValue(position / duration);
 		}
 	}, [position, duration]);
 
@@ -104,10 +72,8 @@ const PlayMusic = () => {
 	const playPausePressed = () => {
 		if (!isPlaying) {
 			TrackPlayer.play();
-			//setIsPlaying(true);
 		} else {
 			TrackPlayer.pause();
-			//setIsPlaying(false);
 		}
 	};
 
@@ -117,17 +83,12 @@ const PlayMusic = () => {
 
 	const slidingCompleted = async value => {
 		await TrackPlayer.seekTo(value * duration);
-		setSliderValue(value);
+		setSeekValue(value);
 		setIsSeeking(false);
 	};
 
-	const nextButton = () => {
-		const newSongNumber = songNumber + 1;
-		if (songs.length > newSongNumber) {
-			setSongNumber(newSongNumber);
-		} else {
-			setSongNumber(0);
-		}
+	const nextButton = async () => {
+		await TrackPlayer.skipToNext();
 	};
 
 	const prevButton = () => {
@@ -195,7 +156,7 @@ const PlayMusic = () => {
 					style={{ width: 300 }}
 					minimumValue={0}
 					maximumValue={1}
-					value={sliderValue}
+					value={seekValue}
 					minimumTrackTintColor={primary}
 					maximumTrackTintColor={primary}
 					onSlidingStart={slidingStarted}
