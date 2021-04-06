@@ -6,7 +6,8 @@
 		"title": "Song 0",
 		"album": "Great Album",
 		"artist": "A Great Dude",
-		"artwork": "https://picsum.photos/300"
+		"artwork": "https://picsum.photos/300",
+        "duration": 240
 	},
 	{
 		"id": 1,

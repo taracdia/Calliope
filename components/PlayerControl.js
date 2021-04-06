@@ -11,8 +11,7 @@ import {
 import Slider from "@react-native-community/slider";
 
 import Styles from "../Styles";
-import { primary } from "./ThemeChoose";
-import PlayerControl from "../components/PlayerControl";
+import { primary } from "../pages/ThemeChoose";
 const songs = require("../songs.json");
 
 const trackPlayerInit = async () => {
@@ -48,7 +47,7 @@ const song = {
 	artwork: "https://picsum.photos/300",
 };
 
-const PlayMusic = () => {
+const PlayerControl = () => {
 	const [isTrackPlayerInit, setIsTrackPlayerInit] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [seekValue, setSeekValue] = useState(0);
@@ -258,6 +257,4 @@ const PlayMusic = () => {
 	);
 };
 
-//TODO: display lyrics instead sometimes
-
-export default PlayMusic;
+export default PlayerControl;
