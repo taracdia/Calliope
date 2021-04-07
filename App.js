@@ -1,8 +1,14 @@
 import React from "react";
-import PlayMusic from "./pages/PlayMusic";
+import MainStackNavigator from "./navigation/AppNavigator";
+import { Provider as StoreProvider } from "react-redux";
+import store from "./redux/store";
 
 const App = () => {
-	return <PlayMusic />;
+	return (
+		<StoreProvider store={store}>
+			<MainStackNavigator />
+		</StoreProvider>
+	);
 };
 
 export default App;

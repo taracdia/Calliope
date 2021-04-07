@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity, Button } from "react-native";
 import TrackPlayer, {
 	TrackPlayerEvents,
 	STATE_PLAYING,
@@ -11,9 +11,9 @@ import {
 import Slider from "@react-native-community/slider";
 
 import Styles from "../Styles";
-import { primary } from "./ThemeChoose";
-import PlayerControl from "../components/PlayerControl";
+import { primary } from "./ThemeChooseScreen";
 const songs = require("../songs.json");
+import ScreenChanger from "../components/ScreenChanger";
 
 const trackPlayerInit = async () => {
 	await TrackPlayer.setupPlayer();
@@ -55,6 +55,8 @@ const PlayMusic = () => {
 	const [isSeeking, setIsSeeking] = useState(false);
 	const { position } = useTrackPlayerProgress(1000);
 	const [track, setTrack] = useState(song);
+
+	const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		const startPlayer = async () => {
@@ -181,7 +183,7 @@ const PlayMusic = () => {
 				/>
 			</View>
 			<View style={[Styles.center, Styles.flex]}>
-				<Text style={Styles.bigBold}>{track.title}</Text>
+				{/* <Text style={Styles.bigBold}>{track.title}</Text> */}
 				{/* <Text style={Styles.artist}>by {songs[songNumber].artist}</Text>
 				<Text style={Styles.artist}>
 					from {songs[songNumber].album}
@@ -254,6 +256,7 @@ const PlayMusic = () => {
 				</TouchableOpacity>
 				{/* TODO: volume and shuffle/sort and repeat */}
 			</View>
+			<ScreenChanger />
 		</View>
 	);
 };
