@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 
-const Styles = StyleSheet.create({
+import { useSelector } from "react-redux";
+
+export const Styles = StyleSheet.create({
 	flex: {
 		flex: 1,
 	},
@@ -25,4 +27,11 @@ const Styles = StyleSheet.create({
 	},
 });
 
-export default Styles;
+export const Theme = () => {
+	const theme = useSelector(state => state);
+	return StyleSheet.create({
+		theme: {
+			color: theme.primary,
+		},
+	});
+};

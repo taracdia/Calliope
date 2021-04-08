@@ -1,6 +1,6 @@
 import { createStore } from "redux";
-import TrackReducer from "./Track";
+import ThemeReducer from "./Theme";
 
-const store = createStore(TrackReducer);
+const store = createStore(ThemeReducer);
 
 export default store;

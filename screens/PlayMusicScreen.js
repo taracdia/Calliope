@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Image, TouchableOpacity, Button } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import TrackPlayer, {
 	TrackPlayerEvents,
 	STATE_PLAYING,
@@ -9,9 +9,9 @@ import {
 	useTrackPlayerEvents,
 } from "react-native-track-player/lib/hooks";
 import Slider from "@react-native-community/slider";
+import { useSelector } from "react-redux";
 
-import Styles from "../Styles";
-import { primary } from "./ThemeChooseScreen";
+import { Styles, Theme } from "../Styles";
 const songs = require("../songs.json");
 import ScreenChanger from "../components/ScreenChanger";
 
@@ -56,7 +56,7 @@ const PlayMusic = () => {
 	const { position } = useTrackPlayerProgress(1000);
 	const [track, setTrack] = useState(song);
 
-	const [count, setCount] = useState(0);
+	const theme = useSelector(state => state);
 
 	useEffect(() => {
 		const startPlayer = async () => {
@@ -196,11 +196,11 @@ const PlayMusic = () => {
 					minimumValue={0}
 					maximumValue={1}
 					value={seekValue}
-					minimumTrackTintColor={primary}
-					maximumTrackTintColor={primary}
+					minimumTrackTintColor={theme.primary}
+					maximumTrackTintColor={theme.primary}
 					onSlidingStart={slidingStarted}
 					onSlidingComplete={slidingCompleted}
-					thumbTintColor={primary}
+					thumbTintColor={theme.primary}
 				/>
 				<Text>{convertTime(track.duration)}</Text>
 			</View>
@@ -211,7 +211,7 @@ const PlayMusic = () => {
 				>
 					<Image
 						source={require("../icons/prev.png")}
-						tintColor={primary}
+						tintColor={theme.primary}
 					/>
 				</TouchableOpacity>
 				<TouchableOpacity
@@ -220,7 +220,7 @@ const PlayMusic = () => {
 				>
 					<Image
 						source={require("../icons/backward10.png")}
-						tintColor={primary}
+						tintColor={theme.primary}
 					/>
 				</TouchableOpacity>
 				<TouchableOpacity
@@ -233,7 +233,7 @@ const PlayMusic = () => {
 								? require("../icons/pause.png")
 								: require("../icons/play.png")
 						}
-						tintColor={primary}
+						tintColor={theme.primary}
 					/>
 				</TouchableOpacity>
 				<TouchableOpacity
@@ -242,7 +242,7 @@ const PlayMusic = () => {
 				>
 					<Image
 						source={require("../icons/forward10.png")}
-						tintColor={primary}
+						tintColor={theme.primary}
 					/>
 				</TouchableOpacity>
 				<TouchableOpacity
@@ -251,7 +251,7 @@ const PlayMusic = () => {
 				>
 					<Image
 						source={require("../icons/next.png")}
-						tintColor={primary}
+						tintColor={theme.primary}
 					/>
 				</TouchableOpacity>
 				{/* TODO: volume and shuffle/sort and repeat */}
