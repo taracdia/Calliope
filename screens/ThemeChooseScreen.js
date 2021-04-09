@@ -1,15 +1,13 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useDispatch } from "react-redux";
-import { TriangleColorPicker } from "react-native-color-picker";
+import { useNavigation } from "@react-navigation/native";
 
 import ScreenChanger from "../components/ScreenChanger";
 import { CHANGE_PRIMARY } from "../redux/Theme";
 import { Styles, Theme } from "../Styles";
-import { useNavigation } from "@react-navigation/native";
 
 const ThemeChoose = () => {
-	const theme = Theme().theme;
+	const primary = Theme().primary;
 	const navigation = useNavigation();
 	return (
 		<View style={{ flex: 1 }}>
@@ -21,10 +19,10 @@ const ThemeChoose = () => {
 					})
 				}
 			>
-				<Text style={theme}>Primary</Text>
+				<Text style={primary}>Primary</Text>
 			</TouchableOpacity>
 			{/* <TouchableOpacity onPress={() => changePrimary("red")}>
-				<Text style={theme}>Background</Text>
+				<Text style={primary}>Background</Text>
 			</TouchableOpacity> */}
 			<ScreenChanger />
 		</View>

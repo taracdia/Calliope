@@ -5,20 +5,26 @@ import { Styles, Theme } from "../Styles";
 
 const ScreenChanger = () => {
 	const navigation = useNavigation();
-	const theme = Theme().theme;
+	const primary = Theme().primary;
 	return (
-		<View>
+		<View
+			style={{
+				flexDirection: "row",
+				justifyContent: "space-between",
+				// flex: 0.2,
+			}}
+		>
 			<TouchableOpacity onPress={() => navigation.navigate("Player")}>
-				<Text style={theme}>Play</Text>
+				<Text style={primary}>Play</Text>
 			</TouchableOpacity>
 			<TouchableOpacity onPress={() => navigation.navigate("List")}>
-				<Text style={theme}>List</Text>
+				<Text style={primary}>List</Text>
 			</TouchableOpacity>
 			<TouchableOpacity onPress={() => navigation.navigate("Theme")}>
-				<Text style={theme}>Theme</Text>
+				<Text style={primary}>Theme</Text>
 			</TouchableOpacity>
 			<TouchableOpacity onPress={() => navigation.navigate("About")}>
-				<Text style={theme}>About</Text>
+				<Text style={primary}>About</Text>
 			</TouchableOpacity>
 		</View>
 	);

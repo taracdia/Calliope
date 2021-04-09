@@ -34,6 +34,7 @@ const ColorPicker = ({ route }) => {
 					borderColor: "blue",
 					borderWidth: 1,
 				}}
+				onPress={() => changeColor(newColor)}
 			>
 				<Text style={{ backgroundColor: "white" }}>SELECT</Text>
 			</TouchableOpacity>

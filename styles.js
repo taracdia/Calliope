@@ -28,10 +28,10 @@ export const Styles = StyleSheet.create({
 });
 
 export const Theme = () => {
-	const theme = useSelector(state => state);
+	const primary = useSelector(state => state).primary;
 	return StyleSheet.create({
-		theme: {
-			color: theme.primary,
+		primary: {
+			color: primary,
 		},
 	});
 };

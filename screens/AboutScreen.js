@@ -4,10 +4,10 @@ import ScreenChanger from "../components/ScreenChanger";
 import { Styles, Theme } from "../Styles";
 
 const About = () => {
-	const theme = Theme().theme;
+	const primary = Theme().primary;
 	return (
 		<View>
-			<Text style={theme}>Icons from Icons8</Text>
+			<Text style={primary}>Icons from Icons8</Text>
 			<ScreenChanger />
 		</View>
 	);
